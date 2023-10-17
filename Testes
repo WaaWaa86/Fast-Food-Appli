@@ -1,0 +1,45 @@
+menu = {
+    "hamburger": 5.00,
+    "tacos": 4.50,
+    "coca": 1.50,
+    "red bull": 2.00
+}
+
+commande = {}
+
+while True:
+    print("Menu:")
+    for item, price in menu.items():
+        print(f"{item.capitalize()}: ${price:.2f}")
+
+    choix = input("Qu'aimeriez-vous commander (ou tapez 'fin' pour terminer) ? ").lower()
+
+    if choix == "fin":
+        break
+
+    if choix in menu:
+        quantite = int(input(f"Combien de {choix} voulez-vous ? "))
+        if choix in commande:
+            commande[choix] += quantite
+        else:
+            commande[choix] = quantite
+    else:
+        print("Désolé, cet article n'est pas au menu.")
+
+print("Récapitulatif de la commande:")
+total = 0
+for item, quantite in commande.items():
+    prix = menu[item]
+    sous-total = prix * quantite
+    print(f"{item.capitalize()}: {quantite} x ${prix:.2f} = ${sous-total:.2f}")
+    total += sous-total
+
+print(f"Total de la commande: ${total:.2f}")
+
+mode = input("Souhaitez-vous emporter ou manger sur place ? ").lower()
+if mode == "emporter":
+    print("Merci pour votre commande à emporter !")
+elif mode == "sur place":
+    print("Merci pour votre commande, nous préparons votre repas !")
+else:
+    print("Mode de commande non reconnu, veuillez préciser 'emporter' ou 'sur place'.")
